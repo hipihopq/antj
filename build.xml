@@ -1,0 +1,33 @@
+<project name="MyProject" default="compile" basedir=".">
+    <property name="src.dir" value="src" />
+    <property name="build.dir" value="build" />
+
+    <target name="clean">
+        <delete dir="build/build" />
+    </target>
+
+    <target name="prepare">
+        <mkdir dir="build/build" />
+    </target>
+
+    <target name="compile" depends="clean, prepare">
+        <javac srcdir="${src.dir}" destdir="build/build" />
+    </target>
+
+    <target name="run" depends="compile">
+        <java classname="Main" fork="true">
+            <classpath>
+                <pathelement path="build/build" />
+            </classpath>
+        </java>
+    </target>
+
+    <target name="test" depends="compile">
+        <java classname="com.example.MyTestClass" fork="true">
+            <classpath>
+                <pathelement path="build/build" />
+            </classpath>
+        </java>
+    </target>
+
+</project>
